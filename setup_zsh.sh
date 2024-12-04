@@ -12,17 +12,11 @@
 
 # install zsh and set default shell
 sudo apt update
-sudo apt install -y zsh curl
+sudo apt install -y zsh curl git
 sudo chsh -s $(which zsh)
 
 # install oh-my-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-# install zsh theme
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
-rm ~/.p10k.zsh
-cp ./.p10k.zsh ~/.p10k.zsh
-echo "source ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k/powerlevel10k.zsh-theme" >> ~/.zshrc
+RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # install zsh plugins
 ## zsh-autosuggestions
@@ -31,8 +25,16 @@ echo "source ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions/zsh-
 
 ## zsh-syntax-highlighting
 git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-
 echo "source ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ~/.zshrc
+
+# install zsh theme
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
+#rm -f ~/.p10k.zsh
+#cp ./.p10k.zsh ~/.p10k.zsh
+echo "source ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k/powerlevel10k.zsh-theme" >> ~/.zshrc
+#sed -i 's/^ZSH_THEME=.*/ZSH_THEME="powerlevel10k\/powerlevel10k"/' ~/.zshrc
+echo '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' >> ~/.zshrc
+
 
 # tmux conf setting
 # sudo apt-get install -y tmux
@@ -45,4 +47,5 @@ echo "source ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting/
 #   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 # fi
 
-source ~/.zshrc
+zsh -c "source ~/.zshrc"
+zsh
