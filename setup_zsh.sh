@@ -1,7 +1,7 @@
 # File: setup_zsh.sh
 # Description: This script automates the installation and configuration of zsh, oh-my-zsh and powerlevel10k on Ubuntu (Devian). It also sets up plugins and custom configurations for zsh.
 
-# Updates: 2024_12_04 
+# Updates: 2024_12_05
 # Author: SeongHo Kim
 # Email: klue980@gmail.com 
 # Usage: 
@@ -19,7 +19,7 @@ sudo apt install -y zsh curl git
 # export SHELL=$(which zsh)
 
 # install oh-my-zsh
-y | RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+Y | RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # install zsh plugins
 ## zsh-autosuggestions
