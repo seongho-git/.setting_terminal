@@ -14,6 +14,7 @@
 sudo apt update
 sudo apt install -y zsh curl git
 sudo chsh -s $(which zsh)
+export SHELL=$(which zsh)
 
 # install oh-my-zsh
 RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -29,8 +30,8 @@ echo "source ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting/
 
 # install zsh theme
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
-#rm -f ~/.p10k.zsh
-#cp ./.p10k.zsh ~/.p10k.zsh
+rm -f ~/.p10k.zsh
+cp ./.p10k.zsh ~/.p10k.zsh
 echo "source ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k/powerlevel10k.zsh-theme" >> ~/.zshrc
 #sed -i "s/^ZSH_THEME=.*/ZSH_THEME='powerlevel10k\/powerlevel10k'/" ~/.zshrc
 echo "[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh" >> ~/.zshrc
