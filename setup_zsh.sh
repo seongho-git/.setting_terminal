@@ -13,11 +13,13 @@
 # install zsh and set default shell
 sudo apt update
 sudo apt install -y zsh curl git
-sudo chsh -s $(which zsh)
-export SHELL=$(which zsh)
+# chsh -s $(which zsh)
+# if not working, sudo passwd $USER
+# temporal
+# export SHELL=$(which zsh)
 
 # install oh-my-zsh
-RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+y | RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # install zsh plugins
 ## zsh-autosuggestions
