@@ -13,7 +13,7 @@
 # install zsh and set default shell
 sudo apt update
 sudo apt install -y zsh curl git
-# chsh -s $(which zsh)
+# chsh -s $(which zsh) $USER
 # if not working, sudo passwd $USER
 # temporal
 # export SHELL=$(which zsh)
