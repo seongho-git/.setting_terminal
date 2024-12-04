@@ -32,8 +32,8 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~
 #rm -f ~/.p10k.zsh
 #cp ./.p10k.zsh ~/.p10k.zsh
 echo "source ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k/powerlevel10k.zsh-theme" >> ~/.zshrc
-#sed -i 's/^ZSH_THEME=.*/ZSH_THEME="powerlevel10k\/powerlevel10k"/' ~/.zshrc
-echo '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' >> ~/.zshrc
+#sed -i "s/^ZSH_THEME=.*/ZSH_THEME='powerlevel10k\/powerlevel10k'/" ~/.zshrc
+echo "[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh" >> ~/.zshrc
 
 
 # tmux conf setting
