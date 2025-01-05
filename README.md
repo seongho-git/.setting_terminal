@@ -1,5 +1,11 @@
 # .setting_terminal
-The `setup_zsh.sh` script is designed to automate the installation and configuration of the Z shell (zsh) and its associated tools, enhancing the terminal experience with features like syntax highlighting, autosuggestions, and a customized theme.
+This repository provides two primary scripts to set up development environments on macOS or Linux:
+
+1. **Zsh Setup Script** — `setup_zsh.sh`  
+2. **Vim Setup Script** — `setup_vim.sh`
+3. **NeoVim Setup Script** — `setup_nvim.sh`
+
+Each script installs necessary dependencies, configures popular plugins, and copies respective configuration files to your home directory.
 
 ## Features
 
@@ -12,7 +18,7 @@ The `setup_zsh.sh` script is designed to automate the installation and configura
 
 ## Installation
 
-To set up your zsh environment using this script, follow these steps:
+To set up your environment using this script, follow these steps:
 
 1. **Clone the Repository**:
 
@@ -30,6 +36,15 @@ To set up your zsh environment using this script, follow these steps:
 
    ```bash
    ./setup_zsh.sh
+   ```
+   ```bash
+   ./setup_vim.sh
+   ```
+   ```bash
+   ./setup_nvim.sh
+   ```
+   ```bash
+   ./setup_all.sh
    ```
 
    *Note*: Ensure the script has execute permissions. If not, modify the permissions with:
