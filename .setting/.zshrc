@@ -114,8 +114,8 @@ source $ZSH/oh-my-zsh.sh
 alias copy="bat --wrap=never -p"
 
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
+source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -137,4 +137,3 @@ function mugo() {
 
 # go to directories
 alias gowork="cd ~/Works"
-alias goxv="cd ~/Works/xv6-riscv"

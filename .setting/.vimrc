@@ -4,7 +4,7 @@ set rtp+=~/.fzf " Add fzf to runtime path
 
 call plug#begin()
 Plug 'Valloric/YouCompleteMe' "Code completion
-Plug 'cormacrelf/vim-colors-github' " Color scheme
+Plug 'NLKNguyen/papercolor-theme' " Color scheme
 Plug 'vim-airline/vim-airline' " Status bar
 
 Plug 'scrooloose/nerdtree' " File explorer
@@ -62,10 +62,10 @@ nnoremap <C-d> x
 inoremap <C-d> <C-o>x
 
 " Colorscheme
-colorscheme github
+colorscheme PaperColor
 let g:github_colors_soft = 1
 set background=dark
-let g:github_colors_block_diffmark = 0
+" let g:github_colors_block_diffmark = 0
 
 au BufReadPost *
 						\ if line("'\"") > 0 && line("'\"") <= line("$") |
