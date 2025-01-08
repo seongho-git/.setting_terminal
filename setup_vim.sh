@@ -30,9 +30,12 @@ system="$(uname -s)"
 # Get the processor type.
 processor="$(uname -m)"
 
-if [[ $processor == "arm64" ]];
-    then sysdir="/opt/homebrew" # Apple arm64
-    else sysdir="/usr/local"    # Intel x86_64
+if [[ $processor == "arm64" ]]; then 
+    echo "Detected Apple Silicon processor."
+    sysdir="/opt/homebrew" # Apple arm64
+else 
+    echo "Detected Intel x86_64 processor."
+    sysdir="/usr/local"    # Intel x86_64
 fi
 
 # Set system-specific variables

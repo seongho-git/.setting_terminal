@@ -113,14 +113,24 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias copy="bat --wrap=never -p"
 
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
+system=$(uname -s)
+
+if [[ $system == "Darwin" ]]; then
+  source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
+  export PATH="/opt/homebrew/bin:$PATH"
+  export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+elif [[ $system == "Linux" ]]; then
+  source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+  source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  source ~/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
+  export PATH="/usr/local/bin:$PATH"
+  export PATH="/usr/local/opt/openjdk/bin:$PATH"
+fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-export PATH="/opt/homebrew/bin:$PATH"
-export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 
 # abbreviations
 alias nv="nvim"
