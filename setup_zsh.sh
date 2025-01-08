@@ -1,13 +1,14 @@
+#!/bin/bash
+# for run this script on bash shell
+
 # File: setup_zsh.sh
 # Description: This script sets up a Zsh environment on macOS or Linux. It ensures necessary tools like Homebrew, Git, and Zsh are installed, copies configuration files, installs Oh My Zsh, and sets up plugins like Zsh-Autosuggestions and Zsh-Syntax-Highlighting.
-# Updates: 2024_12_30
+# Updates: 2025_01_08
 # Author: SeongHo Kim
 # Email: klue980@gmail.com 
 # Usage: 
 #	Run this script in your terminal with: 
 #	./zsh_mac.sh
-
-# !/bin/bash
 
 # Check installation status of required tools
 brew_installed() { command -v brew &>/dev/null; }
@@ -25,7 +26,7 @@ system="$(uname -s)"
 # Get the processor type.
 processor="$(uname -m)"
 
-if [[ $processor == "arm64" ]]; then 
+if [[ $processor == "arm64" || $processor == "aarch64" ]]; then
     echo "Detected Apple Silicon processor."
     sysdir="/opt/homebrew" # Apple arm64
 else 
@@ -101,7 +102,14 @@ fi
 
 # Install Oh My Zsh
 echo "Installing Oh My Zsh..."
-Y | RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+if ! [[ -d ~/.oh-my-zsh ]]; then
+    yes | RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+else
+    echo "Oh My Zsh is already installed."
+    echo "Updating Oh My Zsh..."
+    rm -rf ~/.oh-my-zsh
+    yes | RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
 
 # Install Zsh plugins
 ## Zsh-Autosuggestions
@@ -181,4 +189,36 @@ cp ./.setting/.zshrc ~/.zshrc
 
 # Apply Zsh configuration
 zsh -c "source ~/.zshrc"
+echo "Zsh configuration applied. Restart the terminal."
+
+#########################################################
+# Installation Check                                    #
+#########################################################
+
+echo -e "\n--------------------"
+echo "Installation result:"
+echo -e "--------------------"
+if [[ $system == "Darwin" ]]; then
+    echo "System: macOS"
+    echo -e "Homebrew          ... \c"; if brew_installed; then echo "Yes"; else echo "No"; fi
+    echo -e "Git               ... \c"; if git_installed; then echo "Yes"; else echo "No"; fi
+    echo -e "Curl              ... \c"; if curl_installed; then echo "Yes"; else echo "No"; fi
+    echo -e "Zsh               ... \c"; if zsh_installed; then echo "Yes"; else echo "No"; fi
+elif [[ $system == "Linux" ]]; then
+    echo "System: Linux"
+    echo -e "Git               ... \c"; if git_installed; then echo "Yes"; else echo "No"; fi
+    echo -e "Curl              ... \c"; if curl_installed; then echo "Yes"; else echo "No"; fi
+    echo -e "Zsh               ... \c"; if zsh_installed; then echo "Yes"; else echo "No"; fi    
+fi
+
+# Restart the terminal
 zsh
+
+# # To change the default shell in environments like Multipass
+# chsh -s $(which zsh) $USER
+# # If the above command doesn't work, add the following to your .bashrc file:
+# echo "exec zsh" >> ~/.bashrc
+
+#########################################################
+# End of Script                                         #
+#########################################################

@@ -1,13 +1,14 @@
+#!/bin/bash
+# for run this script on bash shell
+
 # File: setup_nvim.sh
 # Description: This script sets up a Neovim environment with plugins and configurations as specified in the init.vim file.
-# Updates: 2025_01_05
+# Updates: 2025_01_08
 # Author: SeongHo Kim
 # Email: seongho-kim@yonsei.ac.kr
 # Usage:
 #   Run this script in your terminal with:
 #   ./setup_nvim.sh
-
-#!/bin/bash
 
 # Check installation status of required tools
 brew_installed() { command -v brew &>/dev/null; }
@@ -26,7 +27,7 @@ system="$(uname -s)"
 # Get the processor type.
 processor="$(uname -m)"
 
-if [[ $processor == "arm64" ]]; then 
+if [[ $processor == "arm64" || $processor == "aarch64" ]]; then
     echo "Detected Apple Silicon processor."
     sysdir="/opt/homebrew" # Apple arm64
 else 

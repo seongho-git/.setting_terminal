@@ -37,6 +37,14 @@ To set up your environment using this script, follow these steps:
    ```bash
    ./setup_zsh.sh
    ```
+   
+   ```bash
+   # To change the default shell in environments like Multipass
+   chsh -s $(which zsh) $USER
+   # If the above command doesn't work, add the following to your .bashrc file:
+   echo "exec zsh" >> ~/.bashrc
+   ```
+   
    ```bash
    ./setup_vim.sh
    ```

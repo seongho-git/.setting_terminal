@@ -1,24 +1,23 @@
+#!/bin/bash
+# for run this script on bash shell
+
 # File: setup_vim.sh
 # Description: This script sets up a Neovim environment on macOS or Linux. It ensures necessary tools like Homebrew, Git, and Vim are installed, copies configuration files, installs Vim-Plug, and sets up plugins like YouCompleteMe.
-# Updates: 2025_01_05
+# Updates: 2025_01_08
 # Author: SeongHo Kim
 # Email: klue980@gmail.com
 # Usage:
 #   Run this script in your terminal with:
 #   ./setup_vim.sh
 
-#!/bin/bash
-
 # Check installation status of required tools
 brew_installed() { command -v brew &>/dev/null; }
 git_installed() { command -v git &>/dev/null; }
 curl_installed() { command -v curl &>/dev/null; }
-# vim_installed() { command -v vim &>/dev/null; }
+vim_installed() { command -v vim &>/dev/null; }
 # default vim does not support python3
 brew_vim_installed() { [ -f /opt/homebrew/bin/vim ]; }
-vim_installed() { [ -f /usr/local/bin/vim ]; }
 vim_plug_installed() { [ -f ~/.vim/autoload/plug.vim ]; }
-ycm_installed() { [ -d ~/.vim/plugged/YouCompleteMe ]; }
 
 #########################################################
 # Get System Information                                #
@@ -30,7 +29,7 @@ system="$(uname -s)"
 # Get the processor type.
 processor="$(uname -m)"
 
-if [[ $processor == "arm64" ]]; then 
+if [[ $processor == "arm64" || $processor == "aarch64" ]]; then
     echo "Detected Apple Silicon processor."
     sysdir="/opt/homebrew" # Apple arm64
 else 
@@ -86,6 +85,14 @@ else
     echo "Curl is already installed. Version: $(curl --version | head -n 1)"
 fi
 
+# Install CMake if not installed
+echo "Installing build tools..."
+if [[ $system == "Darwin" ]]; then
+    brew install cmake
+elif [[ $system == "Linux" ]]; then
+    sudo apt update && sudo apt install -y build-essential g++ cmake python3-dev
+fi
+
 # Install Vim
 if [[ $system == "Darwin" ]]; then
     # Install Vim if not installed
@@ -136,14 +143,10 @@ vim -c 'PlugInstall' -c 'qa'
 export TERM=xterm-256color
 
 # Install YouCompleteMe plugin
-if ! ycm_installed; then
-    echo "Installing YouCompleteMe plugin..."
-    cd ~/.vim/plugged/YouCompleteMe || exit
-    python3 install.py --clangd-completer
-    cd ~
-else
-    echo "YouCompleteMe plugin directory not found. Ensure it is installed via PlugInstall."
-fi
+echo "Installing YouCompleteMe plugin..."
+cd ~/.vim/plugged/YouCompleteMe || exit
+python3 install.py --clangd-completer
+cd ~
 
 #########################################################
 # Installation Check                                    #
@@ -152,15 +155,33 @@ fi
 echo -e "\n--------------------"
 echo "Installation result:"
 echo -e "--------------------"
-echo -e "Homebrew          ... \c"; if brew_installed; then echo "Yes"; else echo "No"; fi
-echo -e "Git               ... \c"; if git_installed; then echo "Yes"; else echo "No"; fi
-echo -e "Vim               ... \c"; if brew_vim_installed; then echo "Yes"; else echo "No"; fi
-echo -e "Vim-Plug          ... \c"; if vim_plug_installed; then echo "Yes"; else echo "No"; fi
-echo -e "YouCompleteMe     ... \c"; if ycm_installed; then echo "Yes"; else echo "No"; fi
+if [[ $system == "Darwin" ]]; then
+    echo "System: macOS"
+    echo -e "Homebrew          ... \c"; if brew_installed; then echo "Yes"; else echo "No"; fi
+    echo -e "Git               ... \c"; if git_installed; then echo "Yes"; else echo "No"; fi
+    echo -e "Curl              ... \c"; if curl_installed; then echo "Yes"; else echo "No"; fi
+    echo -e "Vim               ... \c"; if brew_vim_installed; then echo "Yes"; else echo "No"; fi
+    echo -e "Vim-Plug          ... \c"; if vim_plug_installed; then echo "Yes"; else echo "No"; fi
+elif [[ $system == "Linux" ]]; then
+    echo "System: Linux"
+    echo -e "Git               ... \c"; if git_installed; then echo "Yes"; else echo "No"; fi
+    echo -e "Curl              ... \c"; if curl_installed; then echo "Yes"; else echo "No"; fi
+    echo -e "Vim               ... \c"; if vim_installed; then echo "Yes"; else echo "No"; fi
+    echo -e "Vim-Plug          ... \c"; if vim_plug_installed; then echo "Yes"; else echo "No"; fi
+fi
 
-echo -e "\nInstallation \c"
-if brew_installed && git_installed && brew_vim_installed && vim_plug_installed && ycm_installed; then
-    echo "complete."
+if [[ $system == "Darwin" ]]; then
+    if brew_installed && git_installed && curl_installed && brew_vim_installed && vim_plug_installed; then
+        echo "Installation complete."
+    else
+        echo "incomplete. Please check the errors above."
+    fi
+elif [[ $system == "Linux" ]]; then
+    if git_installed && curl_installed && vim_installed && vim_plug_installed; then
+        echo "Installation complete."
+    else
+        echo "incomplete. Please check the errors above."
+    fi
 else
     echo "incomplete. Please check the errors above."
 fi
