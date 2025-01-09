@@ -51,6 +51,14 @@ To set up your environment using this script, follow these steps:
    ```bash
    ./setup_nvim.sh
    ```
+
+   ```bash
+   ./setup_copilot.sh
+   source ~/.bashrc
+   # during the installation, you need to enter the Copilot token with web browser
+   # must get a device which can access the web browser
+   ```
+
    ```bash
    ./setup_all.sh
    ```
