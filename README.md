@@ -88,12 +88,12 @@ The script is periodically updated to incorporate the latest tools and configura
 
 This repository is maintained by Seongho Kim.
 
-- **Updates**: December 4th, 2024
+- **Updates**: December 9th, 2024
 - **Email**: [seongho-kim@yonsei.ac.kr](mailto:seongho@yonsei.ac.kr)
 - **GitHub**: [@seongho-git](https://github.com/seongho-git)
 
 For questions or feedback, feel free to reach out via email or through GitHub.
-For more information, visit my [Tistory blog](https://klue.tistory.com/78).
+For more information, visit my [Tistory blog](https://klue.tistory.com).
 
 
 
