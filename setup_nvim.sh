@@ -14,8 +14,7 @@
 brew_installed() { command -v brew &>/dev/null; }
 git_installed() { command -v git &>/dev/null; }
 curl_installed() { command -v curl &>/dev/null; }
-node_installed() { command -v node &>/dev/null; }
-gh_installed() { command -v gh &>/dev/null; }
+# node_installed() { command -v node &>/dev/null; }
 nvim_installed() { command -v nvim &>/dev/null; }
 vim_plug_installed() { [ -f ~/.local/share/nvim/site/autoload/plug.vim ]; }
 
@@ -86,49 +85,34 @@ else
 		echo "Curl is already installed. Version: $(curl --version | head -n 1)"
 fi
 
-# Install Node.js if not installed
-if ! node_installed; then
-        echo "Node.js not found. Installing Node.js..."
-        if [[ $system == "Darwin" ]]; then
-                brew install node
-        elif [[ $system == "Linux" ]]; then
-            # Download and install nvm:
-            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
-            # Verify nvm installation:
-            # Export nvm to the current shell session:
-            export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-            [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# # Install Node.js if not installed
+# if ! node_installed; then
+#         echo "Node.js not found. Installing Node.js..."
+#         if [[ $system == "Darwin" ]]; then
+#                 brew install node
+#         elif [[ $system == "Linux" ]]; then
+#             # Download and install nvm:
+#             curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+#             # Verify nvm installation:
+#             # Export nvm to the current shell session:
+#             export NVM_DIR="$HOME/.nvm"
+#             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#             [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-            # Append nvm initialization to ~/.zshrc for future sessions:
-            echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.zshrc
-            echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> ~/.zshrc
-            echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >> ~/.zshrc
+#             # Append nvm initialization to ~/.zshrc for future sessions:
+#             echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.zshrc
+#             echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> ~/.zshrc
+#             echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >> ~/.zshrc
 
-            # Download and install Node.js:
-            nvm install --lts
-            # Verify the Node.js version:
-            node -v # Should print "v23.6.0".
-            nvm current # Should print "v23.6.0".
-        fi
-else
-        echo "Node.js is already installed. Version: $(node --version)"
-fi
-
-# Install GitHub CLI if not installed
-if ! gh_installed; then
-        echo "GitHub CLI not found. Installing GitHub CLI..."
-        if [[ $system == "Darwin" ]]; then
-                echo "Detected Apple Silicon processor."
-                echo "Login to GitHub CLI and retry the installation."
-                exit 1
-        elif [[ $system == "Linux" ]]; then
-                sudo apt-get update
-                sudo apt-get install gh
-                gh auth login
-        fi
-else
-        echo "GitHub CLI is already installed. Version: $(gh --version)"
+#             # Download and install Node.js:
+#             nvm install --lts
+#             # Verify the Node.js version:
+#             node -v # Should print "v23.6.0".
+#             nvm current # Should print "v23.6.0".
+#         fi
+# else
+#         echo "Node.js is already installed. Version: $(node --version)"
+# fi
 
 # Install Neovim Python dependencies
 if [[ $system == "Darwin" ]]; then

@@ -59,10 +59,7 @@ call plug#begin()
  Plug 'preservim/nerdcommenter' " Commenting plugin
  Plug 'preservim/tagbar' " Tagbar about the code structure
  
- " Code completion
- Plug 'neoclide/coc.nvim' " Autocompletion
  Plug 'terryma/vim-multiple-cursors' " Multiple cursors
- " File writing helpers
 
 call plug#end()
 
@@ -125,11 +122,6 @@ require('bufferline').setup {
   }
 }
 EOF
-
-" Coc commands
-" :CocInstall coc-python
-" :CocInstall coc-clangd
-" :CocInstall coc-snippets
 
 " NeoVim Commands
 " :q      " quit
