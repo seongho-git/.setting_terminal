@@ -93,6 +93,17 @@ if ! node_installed; then
         elif [[ $system == "Linux" ]]; then
             # Download and install nvm:
             curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+            # Verify nvm installation:
+            # Export nvm to the current shell session:
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+            [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+            # Append nvm initialization to ~/.zshrc for future sessions:
+            echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.zshrc
+            echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> ~/.zshrc
+            echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >> ~/.zshrc
+
             # Download and install Node.js:
             nvm install --lts
             # Verify the Node.js version:
@@ -106,7 +117,6 @@ fi
 # Install Neovim Python dependencies
 if [[ $system == "Darwin" ]]; then
 		echo "Installing Neovim Python dependencies..."
-		# pip3 install --upgrade pynvim
         python3 -m venv ~/.venvs/nvim
         source ~/.venvs/nvim/bin/activate
         pip3 install --upgrade pynvim
@@ -114,8 +124,12 @@ if [[ $system == "Darwin" ]]; then
         deactivate
 elif [[ $system == "Linux" ]]; then
 		echo "Installing Neovim Python dependencies..."
-		sudo apt-get update && sudo apt-get install -y python3 python3-pip
-		pip3 install --upgrade pynvim
+		sudo apt-get update && sudo apt-get install -y python3 python3-pip python3-venv
+        python3 -m venv ~/.venvs/nvim
+        source ~/.venvs/nvim/bin/activate
+        pip3 install --upgrade pynvim
+        pip3 list
+        deactivate
 fi
 
 # Install Neovim if not installed

@@ -211,7 +211,9 @@ elif [[ $system == "Linux" ]]; then
 		echo -e "Zsh               ... \c"; if zsh_installed; then echo "Yes"; else echo "No"; fi
 fi
 
-# Restart the terminal
+# Run Zsh
+# Ensure the terminal is running Zsh
+echo "exec zsh" >> ~/.bashrc
 zsh
 
 # # To change the default shell in environments like Multipass
