@@ -2,4 +2,3 @@
 ./setup_vim.sh
 ./setup_nvim.sh
 ./setup_copilot.sh
-source ~/.bashrc

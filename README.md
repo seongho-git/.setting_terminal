@@ -35,13 +35,19 @@ To set up your environment using this script, follow these steps:
 3. **Run the Setup Script**:
 
    ```bash
+   # Run all setup scripts in sequence
+   ./setup_all.sh
+   source ~/.zshrc
+   ```
+
+   ```bash
    ./setup_zsh.sh
    ```
    
    ```bash
    # To change the default shell in environments like Multipass
    chsh -s $(which zsh) $USER
-   # If the above command doesn't work, add the following to your .bashrc file:
+   # If the above command fails, add the following line to your .bashrc file:
    echo "exec zsh" >> ~/.bashrc
    ```
    
@@ -55,15 +61,16 @@ To set up your environment using this script, follow these steps:
    ```bash
    ./setup_copilot.sh
    source ~/.bashrc
-   # during the installation, you need to enter the Copilot token with web browser
-   # must get a device which can access the web browser
+   # During the installation, you will need to enter the Copilot token using a web browser
+   # Ensure you have access to a device with a web browser
+   # visit https://github.com/login/device
    ```
 
    ```bash
    ./setup_all.sh
    ```
 
-   *Note*: Ensure the script has execute permissions. If not, modify the permissions with:
+   *Note* Ensure the script has execute permissions. If not, modify the permissions with:
 
    ```bash
    chmod +x setup_zsh.sh
@@ -87,3 +94,6 @@ This repository is maintained by Seongho Kim.
 
 For questions or feedback, feel free to reach out via email or through GitHub.
 For more information, visit my [Tistory blog](https://klue.tistory.com/78).
+
+
+
