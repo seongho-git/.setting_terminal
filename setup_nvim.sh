@@ -15,6 +15,7 @@ brew_installed() { command -v brew &>/dev/null; }
 git_installed() { command -v git &>/dev/null; }
 curl_installed() { command -v curl &>/dev/null; }
 node_installed() { command -v node &>/dev/null; }
+gh_installed() { command -v gh &>/dev/null; }
 nvim_installed() { command -v nvim &>/dev/null; }
 vim_plug_installed() { [ -f ~/.local/share/nvim/site/autoload/plug.vim ]; }
 
@@ -113,6 +114,21 @@ if ! node_installed; then
 else
         echo "Node.js is already installed. Version: $(node --version)"
 fi
+
+# Install GitHub CLI if not installed
+if ! gh_installed; then
+        echo "GitHub CLI not found. Installing GitHub CLI..."
+        if [[ $system == "Darwin" ]]; then
+                echo "Detected Apple Silicon processor."
+                echo "Login to GitHub CLI and retry the installation."
+                exit 1
+        elif [[ $system == "Linux" ]]; then
+                sudo apt-get update
+                sudo apt-get install gh
+                gh auth login
+        fi
+else
+        echo "GitHub CLI is already installed. Version: $(gh --version)"
 
 # Install Neovim Python dependencies
 if [[ $system == "Darwin" ]]; then

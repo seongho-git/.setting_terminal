@@ -214,7 +214,7 @@ fi
 # Run Zsh
 # Ensure the terminal is running Zsh
 echo "exec zsh" >> ~/.bashrc
-zsh
+source ~/.bashrc
 
 # # To change the default shell in environments like Multipass
 # chsh -s $(which zsh) $USER
