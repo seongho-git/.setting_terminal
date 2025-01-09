@@ -4,8 +4,9 @@ set rtp+=~/.fzf " Add fzf to runtime path
 
 call plug#begin()
 Plug 'Valloric/YouCompleteMe' "Code completion
-Plug 'NLKNguyen/papercolor-theme' " Color scheme
+" Plug 'NLKNguyen/papercolor-theme' " Color scheme
 Plug 'vim-airline/vim-airline' " Status bar
+Plug 'morhetz/gruvbox' " Color scheme
 
 Plug 'scrooloose/nerdtree' " File explorer
 Plug 'yssl/AutoCWD.vim' " Auto change directory
@@ -62,10 +63,14 @@ nnoremap <C-d> x
 inoremap <C-d> <C-o>x
 
 " Colorscheme
-colorscheme PaperColor
-let g:github_colors_soft = 1
+" colorscheme PaperColor
+" let g:github_colors_soft = 1
+" let g:github_colors_block_diffmark = 1
+colorscheme gruvbox
 set background=dark
-" let g:github_colors_block_diffmark = 0
+" let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_bold = 1
+let g:gruvbox_italic = 1
 
 au BufReadPost *
 						\ if line("'\"") > 0 && line("'\"") <= line("$") |

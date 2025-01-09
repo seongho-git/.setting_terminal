@@ -29,22 +29,22 @@ system="$(uname -s)"
 # Get the processor type.
 processor="$(uname -m)"
 
+# Set system-specific variables
 if [[ $processor == "arm64" || $processor == "aarch64" ]]; then
-    echo "Detected Apple Silicon processor."
-    sysdir="/opt/homebrew" # Apple arm64
-else 
-    echo "Detected Intel x86_64 processor."
-    sysdir="/usr/local"    # Intel x86_64
+		echo "Detected Apple Silicon processor."
+		sysdir="/opt/homebrew" # Apple arm64
+else
+		echo "Detected Intel x86_64 processor."
+		sysdir="/usr/local"    # Intel x86_64
 fi
 
-# Set system-specific variables
 if [[ $system == "Darwin" ]]; then
-    echo "Detected macOS system."
+		echo "Detected macOS system."
 elif [[ $system == "Linux" ]]; then
-    echo "Detected Linux system."
+		echo "Detected Linux system."
 else
-    echo "Unsupported system detected. Exiting."
-    exit 1
+		echo "Unsupported system detected. Exiting."
+		exit 1
 fi
 
 #########################################################
@@ -53,84 +53,84 @@ fi
 
 # Install Homebrew if not installed for macOS
 if [[ $system == "Darwin" ]]; then
-    if ! brew_installed; then
-        echo "Homebrew not found. Installing Homebrew..."
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    else
-        echo "Homebrew is already installed. Version: $(brew --version)"
-    fi
+		if ! brew_installed; then
+				echo "Homebrew not found. Installing Homebrew..."
+				sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+		else
+				echo "Homebrew is already installed. Version: $(brew --version)"
+		fi
 fi
 
 # Install Git
 if ! git_installed; then
-    echo "Git not found. Installing Git..."
-    if [[ $system == "Darwin" ]]; then
-        brew install git
-    elif [[ $system == "Linux" ]]; then
-        sudo apt-get update && sudo apt-get install -y git
-    fi
+		echo "Git not found. Installing Git..."
+		if [[ $system == "Darwin" ]]; then
+				brew install git
+		elif [[ $system == "Linux" ]]; then
+				sudo apt-get update && sudo apt-get install -y git
+		fi
 else
-    echo "Git is already installed. Version: $(git --version)"
+		echo "Git is already installed. Version: $(git --version)"
 fi
 
 # Install Curl if not installed
 if ! curl_installed; then
-    echo "Curl not found. Installing Curl..."
-    if [[ $system == "Darwin" ]]; then
-        brew install curl
-    elif [[ $system == "Linux" ]]; then
-        sudo apt-get update && sudo apt-get install -y curl
-    fi
+		echo "Curl not found. Installing Curl..."
+		if [[ $system == "Darwin" ]]; then
+				brew install curl
+		elif [[ $system == "Linux" ]]; then
+				sudo apt-get update && sudo apt-get install -y curl
+		fi
 else
-    echo "Curl is already installed. Version: $(curl --version | head -n 1)"
+		echo "Curl is already installed. Version: $(curl --version | head -n 1)"
 fi
 
 # Install CMake if not installed
 echo "Installing build tools..."
 if [[ $system == "Darwin" ]]; then
-    brew install cmake
+		brew install cmake
 elif [[ $system == "Linux" ]]; then
-    sudo apt update && sudo apt install -y build-essential g++ cmake python3-dev
+		sudo apt update && sudo apt install -y build-essential g++ cmake python3-dev
 fi
 
 # Install Vim
 if [[ $system == "Darwin" ]]; then
-    # Install Vim if not installed
-    if ! brew_vim_installed; then
-        echo "Vim not found. Installing Vim..."
-        brew install vim
-    else
-        echo "Vim is already installed. Version: $(vim --version | head -n 1)"
-    fi
+		# Install Vim if not installed
+		if ! brew_vim_installed; then
+				echo "Vim not found. Installing Vim..."
+				brew install vim
+		else
+				echo "Vim is already installed. Version: $(vim --version | head -n 1)"
+		fi
 elif [[ $system == "Linux" ]]; then
-    # Install Vim if not installed
-    if ! vim_installed; then
-        echo "Vim not found. Installing Vim..."
-        sudo apt-get update && sudo apt-get install -y vim
-    else
-        echo "Vim is already installed. Version: $(vim --version | head -n 1)"
-    fi
+		# Install Vim if not installed
+		if ! vim_installed; then
+				echo "Vim not found. Installing Vim..."
+				sudo apt-get update && sudo apt-get install -y vim
+		else
+				echo "Vim is already installed. Version: $(vim --version | head -n 1)"
+		fi
 fi
 
 # Copy .vimrc and syntax settings
 echo "Copying .vimrc and syntax settings..."
 # check if .vimrc and .vim directory already exists, delete it
 if [ -f ~/.vimrc ]; then
-    rm ~/.vimrc
+		rm ~/.vimrc
 fi
 if [ -d ~/.vim ]; then
-    rm -rf ~/.vim
+		rm -rf ~/.vim
 fi
 cp ./.setting/.vimrc ~/.vimrc
 cp -r ./.vim/syntax ~/.vim/
 
 # Install Vim-Plug
 if ! vim_plug_installed; then
-    echo "Installing Vim-Plug..."
-    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-else
-    echo "Vim-Plug is already installed."
+		echo "Installing Vim-Plug..."
+		curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+				https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+				else
+						echo "Vim-Plug is already installed."
 fi
 
 # Install plugins using Vim-Plug
@@ -156,34 +156,34 @@ echo -e "\n--------------------"
 echo "Installation result:"
 echo -e "--------------------"
 if [[ $system == "Darwin" ]]; then
-    echo "System: macOS"
-    echo -e "Homebrew          ... \c"; if brew_installed; then echo "Yes"; else echo "No"; fi
-    echo -e "Git               ... \c"; if git_installed; then echo "Yes"; else echo "No"; fi
-    echo -e "Curl              ... \c"; if curl_installed; then echo "Yes"; else echo "No"; fi
-    echo -e "Vim               ... \c"; if brew_vim_installed; then echo "Yes"; else echo "No"; fi
-    echo -e "Vim-Plug          ... \c"; if vim_plug_installed; then echo "Yes"; else echo "No"; fi
+		echo "System: macOS"
+		echo -e "Homebrew          ... \c"; if brew_installed; then echo "Yes"; else echo "No"; fi
+		echo -e "Git               ... \c"; if git_installed; then echo "Yes"; else echo "No"; fi
+		echo -e "Curl              ... \c"; if curl_installed; then echo "Yes"; else echo "No"; fi
+		echo -e "Vim               ... \c"; if brew_vim_installed; then echo "Yes"; else echo "No"; fi
+		echo -e "Vim-Plug          ... \c"; if vim_plug_installed; then echo "Yes"; else echo "No"; fi
 elif [[ $system == "Linux" ]]; then
-    echo "System: Linux"
-    echo -e "Git               ... \c"; if git_installed; then echo "Yes"; else echo "No"; fi
-    echo -e "Curl              ... \c"; if curl_installed; then echo "Yes"; else echo "No"; fi
-    echo -e "Vim               ... \c"; if vim_installed; then echo "Yes"; else echo "No"; fi
-    echo -e "Vim-Plug          ... \c"; if vim_plug_installed; then echo "Yes"; else echo "No"; fi
+		echo "System: Linux"
+		echo -e "Git               ... \c"; if git_installed; then echo "Yes"; else echo "No"; fi
+		echo -e "Curl              ... \c"; if curl_installed; then echo "Yes"; else echo "No"; fi
+		echo -e "Vim               ... \c"; if vim_installed; then echo "Yes"; else echo "No"; fi
+		echo -e "Vim-Plug          ... \c"; if vim_plug_installed; then echo "Yes"; else echo "No"; fi
 fi
 
 if [[ $system == "Darwin" ]]; then
-    if brew_installed && git_installed && curl_installed && brew_vim_installed && vim_plug_installed; then
-        echo "Installation complete."
-    else
-        echo "incomplete. Please check the errors above."
-    fi
+		if brew_installed && git_installed && curl_installed && brew_vim_installed && vim_plug_installed; then
+				echo "Installation complete."
+		else
+				echo "incomplete. Please check the errors above."
+		fi
 elif [[ $system == "Linux" ]]; then
-    if git_installed && curl_installed && vim_installed && vim_plug_installed; then
-        echo "Installation complete."
-    else
-        echo "incomplete. Please check the errors above."
-    fi
+		if git_installed && curl_installed && vim_installed && vim_plug_installed; then
+				echo "Installation complete."
+		else
+				echo "incomplete. Please check the errors above."
+		fi
 else
-    echo "incomplete. Please check the errors above."
+		echo "incomplete. Please check the errors above."
 fi
 
 #########################################################
