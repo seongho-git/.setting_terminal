@@ -54,7 +54,8 @@ set ts=4 " Tab size
 set incsearch " Incremental search
 " set statusline=\ %<%l:%v\ [%P]%=%a\ %h%m%r\ %F\
 " set expandtab " Indents <Tab> as spaces
-set nowrap " No wrap lines
+set wrap " wrap lines
+set breakindent " indent with wrap
 set laststatus=2 " Always show status bar
 set sessionoptions-=blank " Don't save empty windows
 

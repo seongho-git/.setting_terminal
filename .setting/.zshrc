@@ -2,7 +2,7 @@
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+		source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 # If you come from bash you might have to change your $PATH.
@@ -78,7 +78,7 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-	git
+		git
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -116,17 +116,17 @@ alias copy="bat --wrap=never -p"
 system=$(uname -s)
 
 if [[ $system == "Darwin" ]]; then
-  source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-  source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-  source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
-  export PATH="/opt/homebrew/bin:$PATH"
-  export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+		source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+		source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+		source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
+		export PATH="/opt/homebrew/bin:$PATH"
+		export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 elif [[ $system == "Linux" ]]; then
-  source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-  source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-  source ~/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
-  export PATH="/usr/local/bin:$PATH"
-  export PATH="/usr/local/opt/openjdk/bin:$PATH"
+		source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+		source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+		source ~/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
+		export PATH="/usr/local/bin:$PATH"
+		export PATH="/usr/local/opt/openjdk/bin:$PATH"
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -136,14 +136,33 @@ fi
 alias nv="nvim"
 alias mu="multipass"
 function mugo() {
-  if [ -z "$1" ]; then
-    echo "Usage: mugo <instance-name>"
-    return 1
-  fi
-  local instance_name=$1
-  multipass start $instance_name
-  multipass shell $instance_name
+		if [ -z "$1" ]; then
+				echo "Usage: mugo <instance-name>"
+				return 1
+		fi
+		local instance_name=$1
+		multipass start $instance_name
+		multipass shell $instance_name
 }
 
 # go to directories
 alias gowork="cd ~/Works"
+
+function dogo() {
+		if [ -z "$1" ]; then
+				echo "Usage: dogo <instance-name>"
+				return 1
+		fi
+		local instance_name=$1
+		sudo docker start $instance_name
+		sudo docker attach $instance_name
+}
+
+function dodo() {
+		if [ -z "$1" ]; then
+				echo "Usage: dogo <instance-name>"
+				return 1
+		fi
+		sudo docker $@
+}
+
