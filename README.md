@@ -7,6 +7,15 @@ This repository provides two primary scripts to set up development environments 
 
 Each script installs necessary dependencies, configures popular plugins, and copies respective configuration files to your home directory.
 
+## Recommended Font for Zsh
+
+To ensure that your terminal displays all icons and symbols correctly—especially when using the Powerlevel10k theme—it is highly recommended to use a Nerd Font such as **MesloLGS NF**. Without this font, your prompt may appear broken or display missing characters.
+
+- **Download MesloLGS NF:** [Nerd Fonts - Meslo](https://github.com/ryanoasis/nerd-fonts/releases/latest)
+- After installation, set your terminal’s font to MesloLGS NF in your terminal preferences.
+
+This will prevent font rendering issues and provide the best visual experience when using zsh.
+
 ## Features
 
 - **Zsh Installation**: Installs zsh using the system's package manager.
