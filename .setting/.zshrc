@@ -146,7 +146,7 @@ function mugo() {
 }
 
 # go to directories
-alias gowork="cd ~/Works"
+# alias gowork="cd ~/Works"
 
 function dogo() {
 		if [ -z "$1" ]; then
@@ -154,8 +154,8 @@ function dogo() {
 				return 1
 		fi
 		local instance_name=$1
-		sudo docker start $instance_name
-		sudo docker attach $instance_name
+		docker start $instance_name
+		docker attach $instance_name
 }
 
 function dodo() {
@@ -163,7 +163,7 @@ function dodo() {
 				echo "Usage: dogo <instance-name>"
 				return 1
 		fi
-		sudo docker $@
+		docker $@
 }
 
 export TERM=xterm-256color
