@@ -166,5 +166,17 @@ function dodo() {
 		docker $@
 }
 
+alias cde="claude"
+alias aaa="clear"
+alias aa="clear"
+alias ss="cd && source start.sh"
+alias sss="cd && source start.sh"
+alias ㄴㄴ="cd && source start.sh"
+alias ㄴㄴㄴ="cd && source start.sh"
+alias ㅊㅇ="cd"
+alias ㅁㅁ="clear"
+alias ㅁㅁㅁ="clear"
+alias ㅣㄴ="ls"
+alias ㅣ="l"
 export TERM=xterm-256color
 export COLORTERM=truecolor
