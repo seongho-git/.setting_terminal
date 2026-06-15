@@ -149,23 +149,36 @@ function mugo() {
 # alias gowork="cd ~/Works"
 
 function dogo() {
-		if [ -z "$1" ]; then
-				echo "Usage: dogo <instance-name>"
-				return 1
-		fi
-		local instance_name=$1
-		docker start $instance_name
-		docker attach $instance_name
+                if [ -z "$1" ]; then
+                                echo "Usage: dogo <instance-name>"
+                                return 1
+                fi
+                local instance_name=$1
+                docker start $instance_name
+                docker exec -it -u seongho $instance_name /bin/bash
 }
 
 function dodo() {
-		if [ -z "$1" ]; then
-				echo "Usage: dogo <instance-name>"
-				return 1
-		fi
-		docker $@
+                if [ -z "$1" ]; then
+                                echo "Usage: dogo <instance-name>"
+                                return 1
+                fi
+                docker $@
 }
 
+alias govo="cd volume"
+alias goar="cd archive"
+
+export PATH=/usr/local/cuda/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+
+export TERM=xterm-256color
+export COLORTERM=truecolor
+export PATH="$HOME/.local/bin:$PATH"
+function cld() {
+                claude $@
+}
+export PATH="$HOME/.claude-code-top:$PATH"
 alias cde="claude"
 alias aaa="clear"
 alias aa="clear"
@@ -178,5 +191,3 @@ alias ㅁㅁ="clear"
 alias ㅁㅁㅁ="clear"
 alias ㅣㄴ="ls"
 alias ㅣ="l"
-export TERM=xterm-256color
-export COLORTERM=truecolor
